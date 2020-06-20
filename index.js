@@ -63,7 +63,7 @@ class HockeyTech {
         return res.data;
     }
 
-    async gamesPerDay(startDate, endDate) {
+    async getGamesPerDay(startDate, endDate) {
         const config = this._getModulekitConfig('gamesperday');
         config.params['start_date'] = startDate;
         config.params['end_date'] = endDate;
@@ -152,11 +152,11 @@ class HockeyTech {
         return res.data;
     }
 
-    async getSeasonSchedule(seasonId, teamId = '') {
+    async getSeasonSchedule(seasonId, teamId = 0) {
         const config = this._getModulekitConfig('schedule');
         config.params['season_id'] = seasonId;
 
-        if (teamId && teamId !== '') {
+        if (teamId && teamId !== 0) {
             config.params['team_id'] = teamId;
         }
 
@@ -206,7 +206,7 @@ class HockeyTech {
         return res.data;
     }
 
-    _getStatViewTypeConfig(seasonId, statType, options) {
+    _getStatViewTypeConfig(seasonId, statType, options = {}) {
         const config = this._getModulekitConfig('statviewtype');
         config.params['season_id'] = seasonId;
         config.params['type'] = statType;
@@ -218,7 +218,7 @@ class HockeyTech {
         return config;
     }
 
-    async getTopSkaters(seasonId, options) {
+    async getTopSkaters(seasonId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'topscorers', options);
         config.params['qualified'] = options.qualified || 'qualified';
 
@@ -226,7 +226,7 @@ class HockeyTech {
         return res.data;
     }
 
-    async getTopGoalies(seasonId, options) {
+    async getTopGoalies(seasonId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'topgoalies', options);
         config.params['qualified'] = options.qualified || 'qualified';
 
@@ -234,7 +234,7 @@ class HockeyTech {
         return res.data;
     }
 
-    async getSkatersByTeam(seasonId, teamId, options) {
+    async getSkatersByTeam(seasonId, teamId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'skaters', options);
         config.params['team_id'] = teamId;
 
@@ -242,7 +242,7 @@ class HockeyTech {
         return res.data;
     }
 
-    async getGoaliesByTeam(seasonId, teamId, options) {
+    async getGoaliesByTeam(seasonId, teamId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'goalies', options);
         config.params['team_id'] = teamId;
 
@@ -250,14 +250,14 @@ class HockeyTech {
         return res.data;
     }
 
-    async getStreaks(seasonId, options) {
+    async getStreaks(seasonId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'streaks', options);
 
         const res = await axios.get(this._modulekitBaseUrl, config);
         return res.data;
     }
 
-    async getTransactions(seasonId, options) {
+    async getTransactions(seasonId, options = {}) {
         const config = this._getStatViewTypeConfig(seasonId, 'transactions', options);
 
         const res = await axios.get(this._modulekitBaseUrl, config);

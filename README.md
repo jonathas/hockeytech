@@ -25,12 +25,16 @@ Inform the key, the client code and a language code (if other than 'en') when cr
 ```javascript
 import HockeyTech from "hockeytech";
 
-const ht = new HockeyTech('4767a11864244441', 'ohl', 'fr');
+const ht = new HockeyTech('4767a11864244441', 'ohl');
 
 ht.getSeasonList()
-    .then(data => console.log(data));
+    .then(data => console.log(data))
     .catch(err => console.log(err));
 ```
+
+## TODO
+
+- Add types for the responses
 
 ## Maintainer
 
