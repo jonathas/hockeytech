@@ -1,6 +1,6 @@
 {
   "name": "hockeytech",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package to access the HockeyTech API",
   "author": "Jonathas Ribeiro <contact@jonathas.com>",
   "license": "MIT",
