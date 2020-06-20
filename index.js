@@ -3,6 +3,7 @@ import axios from 'axios';
 class HockeyTech {
     constructor(key, clientCode, language = 'en') {
         this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
+        this._gameCenterBaseUrl = 'http://cluster.leaguestat.com/feed/';
         this._key = key;
         this._clientCode = clientCode;
         this._language = language;
@@ -275,7 +276,29 @@ class HockeyTech {
         return res.data;
     }
 
-    async getGamePreview()
+    async getGamePreview(gameId) {
+        const config = this._getGameCenterConfig(gameId, 'preview');
+        const res = await axios.get(this._gameCenterBaseUrl, config);
+        return res.data;
+    }
+
+    async getGamePlayByPlay(gameId) {
+        const config = this._getGameCenterConfig(gameId, 'pxpverbose');
+        const res = await axios.get(this._gameCenterBaseUrl, config);
+        return res.data;
+    }
+
+    async getGameClock(gameId) {
+        const config = this._getGameCenterConfig(gameId, 'clock');
+        const res = await axios.get(this._gameCenterBaseUrl, config);
+        return res.data;
+    }
+
+    async getGameSummary(gameId) {
+        const config = this._getGameCenterConfig(gameId, 'gamesummary');
+        const res = await axios.get(this._gameCenterBaseUrl, config);
+        return res.data;
+    }
 }
 
 module.exports = HockeyTech;
