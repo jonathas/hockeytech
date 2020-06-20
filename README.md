@@ -20,12 +20,12 @@ HockeyTech is a worldwide leader in providing hockey-related technologies, analy
 
 ## Usage
 
-Inform the API base and API Token when creating a new object
+Inform the key, the client code and a language code (if other than 'en') when creating a new object
 
 ```javascript
 import HockeyTech from "hockeytech";
 
-const ht = new HockeyTech('4767a11864244441', 'ohl');
+const ht = new HockeyTech('4767a11864244441', 'ohl', 'fr');
 
 ht.getSeasonList()
     .then(data => console.log(data));
