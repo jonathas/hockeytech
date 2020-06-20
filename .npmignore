@@ -1,0 +1,6 @@
+.editorconfig
+.eslintignore
+.eslintrc.json
+.release-it.js
+changelog.hbs
+commitlint.config.js

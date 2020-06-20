@@ -1,0 +1,43 @@
+{
+  "name": "hockeytech",
+  "version": "0.0.1",
+  "description": "Package to access the HockeyTech API",
+  "author": "Jonathas Ribeiro <contact@jonathas.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "lint": "eslint .",
+    "release": "release-it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathas/hockeytech.git"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "auto-changelog": "2.0.0",
+    "babel-eslint": "10.1.0",
+    "eslint": "6.8.0",
+    "eslint-plugin-security": "1.4.0",
+    "husky": "4.2.5",
+    "release-it": "13.6.1"
+  },
+  "keywords": [
+    "package",
+    "hockey",
+    "hockeytech",
+    "node",
+    "browser"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
