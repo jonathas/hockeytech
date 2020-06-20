@@ -9,8 +9,12 @@ class HockeyTech {
         this._language = language;
     }
 
-    setBaseUrl(baseUrl) {
-        this._modulekitBaseUrl = baseUrl;
+    setModulekitBaseUrl(modulekitBaseUrl) {
+        this._modulekitBaseUrl = modulekitBaseUrl;
+    }
+
+    setGameCenterBaseUrl(gameCenterBaseUrl) {
+        this._gameCenterBaseUrl = gameCenterBaseUrl;
     }
 
     setKey(key) {
