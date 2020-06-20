@@ -1,5 +1,4 @@
-declare namespace HockeyTech {
-
+export default class HockeyTech {
+    constructor(key: string, clientCode: string, language?: string);
+    getSeasonList(): Promise<any>;
 }
-
-export = HockeyTech;

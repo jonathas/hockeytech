@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios').default;
 
 class HockeyTech {
     constructor(key, clientCode, language = 'en') {
@@ -305,4 +305,4 @@ class HockeyTech {
     }
 }
 
-module.exports = HockeyTech;
+exports.default = HockeyTech;
