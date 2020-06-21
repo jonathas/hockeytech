@@ -41,14 +41,14 @@ export default class HockeyTech {
      * Retrieves the daily schedule
      * @param fetchDate string Date format: YYYY-MM-DD
      */
-    getDailySchedule(fetchDate: string): Promise<any>;
+    getDailySchedule(fetchDate: string): Promise<DailyScheduleResponse>;
 
     /**
      * Retrieves how many games per day
      * @param startDate string
      * @param endDate string
      */
-    getGamesPerDay(startDate: string, endDate: string): Promise<any>;
+    getGamesPerDay(startDate: string, endDate: string): Promise<GamesPerDayResponse>;
 
     /**
      * Retrieves the roster
@@ -99,13 +99,13 @@ export default class HockeyTech {
     /**
      * Retrieves the season list
      */
-    getSeasonList(): Promise<any>;
+    getSeasonList(): Promise<SeasonListResponse>;
 
     /**
      * Retrieves the teams by season
      * @param seasonId number
      */
-    getTeamsBySeason(seasonId: number): Promise<any>;
+    getTeamsBySeason(seasonId: number): Promise<TeamsBySeasonResponse>;
 
     /**
      * Retrieves the season schedule.
@@ -113,7 +113,7 @@ export default class HockeyTech {
      * @param seasonId number
      * @param teamId number
      */
-    getSeasonSchedule(seasonId: number, teamId?: number): Promise<any>;
+    getSeasonSchedule(seasonId: number, teamId?: number): Promise<SeasonScheduleResponse>;
 
     /**
      * Retrieves the standing types
@@ -278,7 +278,7 @@ export default class HockeyTech {
      * Retrieves the game summary
      * @param gameId number
      */
-    getGameSummary(gameId: number): Promise<any>;
+    getGameSummary(gameId: number): Promise<GameSummaryResponse>;
 }
 
 export interface StatViewTypeConfigOptions {
@@ -311,4 +311,721 @@ export interface StatViewTypeConfigOptions {
      * Defaults to qualified when used
      */
     qualified?: string;
+}
+
+export interface Parameters {
+    feed: string;
+    view: string;
+    key: string;
+    fmt: string;
+    client_code: string;
+    lang: string;
+    league_code: string;
+    lang_id: number;
+    league_id: string;
+    season_id: string;
+    team_id?: string;
+}
+
+export interface Season {
+    season_id: string;
+    season_name: string;
+    shortname: string;
+    career: string;
+    playoff: string;
+    start_date: string;
+    end_date: string;
+}
+
+export interface Copyright {
+    required_copyright: string;
+    required_link: string;
+    powered_by: string;
+    powered_by_url: string;
+}
+
+export interface SiteKit {
+    Parameters: Parameters;
+    Copyright: Copyright;
+}
+
+export interface SiteKitSeasons extends SiteKit {
+    Seasons: Season[];
+}
+
+export interface SeasonListResponse {
+    SiteKit: SiteKitSeasons;
+}
+
+export interface TeamsBySeason {
+    id: string;
+    name: string;
+    city: string;
+    code: string;
+    nickname: string;
+    team_caption: string;
+    division_id: string;
+    division_long_name: string;
+    division_short_name: string;
+    team_logo_url: string;
+}
+
+export interface SiteKitTeamsBySeason extends SiteKit {
+    Teamsbyseason: TeamsBySeason[];
+}
+
+export interface TeamsBySeasonResponse {
+    SiteKit: SiteKitTeamsBySeason;
+}
+
+export interface Schedule {
+    id: string;
+    game_id: string;
+    season_id: string;
+    quick_score: string;
+    date_played: string;
+    date: string;
+    date_with_day: string;
+    date_time_played: Date;
+    GameDateISO8601: Date;
+    home_team: string;
+    visiting_team: string;
+    home_goal_count: string;
+    visiting_goal_count: string;
+    period: string;
+    overtime: string;
+    schedule_time: string;
+    schedule_notes: string;
+    game_clock: string;
+    timezone: string;
+    game_number: string;
+    shootout: string;
+    attendance: string;
+    status: string;
+    location: string;
+    game_status: string;
+    intermission: string;
+    game_type: string;
+    game_letter: string;
+    if_necessary: string;
+    period_trans: string;
+    started: string;
+    final: string;
+    tickets_url: string;
+    home_audio_url: string;
+    home_video_url: string;
+    home_webcast_url: string;
+    visiting_audio_url: string;
+    visiting_video_url: string;
+    visiting_webcast_url: string;
+    home_team_name: string;
+    home_team_code: string;
+    home_team_nickname: string;
+    home_team_city: string;
+    home_team_division_long: string;
+    home_team_division_short: string;
+    visiting_team_name: string;
+    visiting_team_code: string;
+    visiting_team_nickname: string;
+    visiting_team_city: string;
+    visiting_team_division_long: string;
+    visiting_team_division_short: string;
+    notes_text: string;
+    use_shootouts: string;
+    venue_name: string;
+    venue_url: string;
+    venue_location: string;
+    last_modified: string;
+    client_code: string;
+    scheduled_time: string;
+    mobile_calendar: string;
+}
+
+export interface SiteKitSeasonSchedule {
+    Parameters: Parameters;
+    Schedule: Schedule[];
+    Copyright: Copyright;
+}
+
+export interface SeasonScheduleResponse {
+    SiteKit: SiteKitSeasonSchedule;
+}
+
+export interface GamesPerDay {
+    date_played: string;
+    month: string;
+    year: string;
+    dayofweek: string;
+    day: string;
+    numberofgames: string;
+}
+
+export interface SiteKitGamesPerDay {
+    Parameters: Parameters;
+    Gamesperday: GamesPerDay[];
+    Copyright: Copyright;
+}
+
+export interface GamesPerDayResponse {
+    SiteKit: SiteKitGamesPerDay;
+}
+
+export interface GoalSummary {
+    code: string;
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    time: string;
+    period_id: string;
+    short_name: string;
+    long_name: string;
+    power_play: string;
+    empty_net: string;
+    penalty_shot: string;
+    short_handed: string;
+    game_winning: string;
+    insurance_goal: string;
+    actual_last_name: string;
+}
+
+export interface GoalList {
+    code: string;
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    time: string;
+    period_id: string;
+    short_name: string;
+    long_name: string;
+    power_play: string;
+    empty_net: string;
+    penalty_shot: string;
+    short_handed: string;
+    game_winning: string;
+    insurance_goal: string;
+    actual_last_name: string;
+}
+
+export interface HomeStats {
+    wins: string;
+    losses: string;
+    ties: string;
+    ot_wins: string;
+    ot_losses: string;
+    shootout_losses: string;
+    points: string;
+    use_shootouts: string;
+    record: string;
+}
+
+export interface VisitingStats {
+    wins: string;
+    losses: string;
+    ties: string;
+    ot_wins: string;
+    ot_losses: string;
+    shootout_losses: string;
+    points: string;
+    use_shootouts: string;
+    record: string;
+}
+
+export interface TeamGoalsByPeriod {
+    1: string;
+    2: string;
+    3: string;
+}
+
+export interface GoalsByPeriod {
+    1: number;
+    2: number;
+    3: number;
+}
+
+export interface Period {
+    id: string;
+    short_name: string;
+    long_name: string;
+    length: string;
+    mandatory: string;
+    sort_order?: string;
+    period_id?: string;
+}
+
+export interface Periods {
+    1: Period;
+    2: Period;
+    3: Period;
+}
+
+export interface GamesByDate {
+    id: string;
+    season_id: string;
+    league_id: string;
+    home_team: string;
+    visiting_team: string;
+    game_number: string;
+    game_letter: string;
+    type_id: string;
+    if_necessary: string;
+    quick_score: string;
+    mvp1: string;
+    mvp2: string;
+    mvp3: string;
+    featured_player_id: string;
+    date_played: string;
+    schedule_time: string;
+    timezone: string;
+    start_time: string;
+    end_time: string;
+    forfeit: string;
+    shootout: string;
+    shootout_first_shooter_home: string;
+    attendance: string;
+    location: string;
+    home_coach: string;
+    home_assistant_coach1: string;
+    home_assistant_coach2: string;
+    home_manager: string;
+    visiting_coach: string;
+    visiting_assistant_coach1: string;
+    visiting_assistant_coach2: string;
+    visiting_manager: string;
+    period: string;
+    game_clock: string;
+    status: string;
+    started: string;
+    pending_final: string;
+    final: string;
+    home_goal_count: string;
+    visiting_goal_count: string;
+    public_notes: string;
+    private_notes: string;
+    league_game_notes: string;
+    home_team_notes: string;
+    visiting_team_notes: string;
+    capacity: string;
+    schedule_notes: string;
+    schedule_notes_fr: string;
+    home_audio_url: string;
+    home_video_url: string;
+    home_webcast_url: string;
+    home_audio_url_fr: string;
+    home_video_url_fr: string;
+    home_webcast_url_fr: string;
+    visiting_webcast_url: string;
+    visiting_video_url: string;
+    visiting_audio_url: string;
+    visiting_webcast_url_fr: string;
+    visiting_video_url_fr: string;
+    visiting_audio_url_fr: string;
+    tickets_url: string;
+    tickets_url_fr: string;
+    last_modified: string;
+    imported_id: string;
+    game_id: string;
+    venue: string;
+    venue_location: string;
+    game_status: string;
+    intermission: string;
+    home_team_name: string;
+    home_team_nickname: string;
+    home_team_code: string;
+    home_team_city: string;
+    visiting_team_name: string;
+    visiting_team_nickname: string;
+    visiting_team_code: string;
+    visiting_team_city: string;
+    playoff: string;
+    home_stats: HomeStats;
+    visiting_stats: VisitingStats;
+    date_played_fmt: string;
+    home_team_goals_by_period: TeamGoalsByPeriod;
+    visiting_team_goals_by_period: TeamGoalsByPeriod;
+    home_power_play_goals: string;
+    home_power_play_opportunities: string;
+    home_power_plays: string;
+    visiting_power_play_goals: string;
+    visiting_power_play_opportunities: string;
+    visiting_power_plays: string;
+    home_shots: string;
+    visiting_shots: string;
+    periods: Periods;
+    goal_summary: GoalSummary[];
+    goal_list: GoalList[];
+}
+
+export interface SiteKitDailySchedule {
+    Parameters: Parameters;
+    Gamesbydate: GamesByDate[];
+    Copyright: Copyright;
+}
+
+export interface DailyScheduleResponse {
+    SiteKit: SiteKitDailySchedule;
+}
+
+export interface Meta {
+    id: string;
+    season_id: string;
+    league_id: string;
+    home_team: string;
+    visiting_team: string;
+    game_number: string;
+    game_letter: string;
+    type_id: string;
+    if_necessary: string;
+    quick_score: string;
+    mvp1: string;
+    mvp2: string;
+    mvp3: string;
+    featured_player_id: string;
+    date_played: string;
+    schedule_time: string;
+    timezone: string;
+    start_time: string;
+    end_time: string;
+    forfeit: string;
+    shootout: string;
+    shootout_first_shooter_home: string;
+    attendance: string;
+    location: string;
+    home_coach: string;
+    home_assistant_coach1: string;
+    home_assistant_coach2: string;
+    home_manager: string;
+    visiting_coach: string;
+    visiting_assistant_coach1: string;
+    visiting_assistant_coach2: string;
+    visiting_manager: string;
+    period: string;
+    game_clock: string;
+    status: string;
+    started: string;
+    pending_final: string;
+    final: string;
+    home_goal_count: string;
+    visiting_goal_count: string;
+    public_notes: string;
+    private_notes: string;
+    league_game_notes: string;
+    home_team_notes: string;
+    visiting_team_notes: string;
+    capacity: string;
+    schedule_notes: string;
+    schedule_notes_fr: string;
+    home_audio_url: string;
+    home_video_url: string;
+    home_webcast_url: string;
+    home_audio_url_fr: string;
+    home_video_url_fr: string;
+    home_webcast_url_fr: string;
+    visiting_webcast_url: string;
+    visiting_video_url: string;
+    visiting_audio_url: string;
+    visiting_webcast_url_fr: string;
+    visiting_video_url_fr: string;
+    visiting_audio_url_fr: string;
+    tickets_url: string;
+    tickets_url_fr: string;
+    last_modified: string;
+    imported_id: string;
+    start_time_without_seconds: string;
+    end_time_without_seconds: string;
+    "12_hour_start_time_without_seconds": string;
+    "12_hour_end_time_without_seconds": string;
+    length: string;
+    timezone_short: string;
+}
+
+export interface HomeOrVisitor {
+    id: string;
+    league_id: string;
+    code: string;
+    team_code: string;
+    address1: string;
+    address2: string;
+    province: string;
+    postal: string;
+    country: string;
+    phone: string;
+    fax: string;
+    active: string;
+    placeholder: string;
+    team_id: string;
+    lang_id: string;
+    season_id: string;
+    name: string;
+    city: string;
+    nickname: string;
+    logo_caption: string;
+}
+
+export interface Mvp {
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    jersey_number: string;
+    home: number;
+}
+
+export interface Official {
+    official_type_id: string;
+    description: string;
+    first_name: string;
+    last_name: string;
+    jersey_number: string;
+    person_id: string;
+}
+
+export interface PlayerBaseInfo {
+    player_id: string;
+    jersey_number: string;
+    first_name: string;
+    last_name: string;
+}
+
+export interface PlayerInfo extends PlayerBaseInfo {
+    team_id: string;
+    team_code: string;
+}
+
+export interface Penalty {
+    event: string;
+    time_off_formatted: string;
+    team_id: string;
+    home: string;
+    period_id: string;
+    period: string;
+    offence: string;
+    pp: string;
+    bench: string;
+    penalty_shot: string;
+    minutes: number;
+    minutes_formatted: string;
+    penalty_class_id: string;
+    penalty_class: string;
+    lang_penalty_description: string;
+    s: number;
+    player_penalized_info: PlayerInfo;
+    player_served_info: PlayerInfo;
+}
+
+export interface Goal {
+    event: string;
+    x_location: string;
+    y_location: string;
+    time: string;
+    team_id: string;
+    home: string;
+    period_id: string;
+    goal_type: string;
+    location_set: string;
+    power_play: string;
+    empty_net: string;
+    penalty_shot: string;
+    short_handed: string;
+    insurance_goal: string;
+    game_winning: string;
+    game_tieing: string;
+    scorer_goal_num: string;
+    s: number;
+    goal_scorer: PlayerInfo;
+    assist1_player: PlayerInfo;
+    assist2_player: PlayerInfo;
+    plus: PlayerBaseInfo[];
+    minus: PlayerBaseInfo[];
+}
+
+export interface Goalies {
+    visitor: GoaliesHomeVisitor[];
+    home: GoaliesHomeVisitor[];
+}
+
+export interface GoaliesHomeVisitor {
+    id: string;
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    period_start: string;
+    time_start: string;
+    period_end: string;
+    time_end: string;
+    saves: string;
+    secs: string;
+    seconds: string;
+    goals_against: string;
+    win: string;
+    loss: string;
+    shootout_loss: string;
+    ot_loss: string;
+    tie: string;
+    shutout: string;
+    secs_mmss: string;
+    shots_against: number;
+}
+
+export interface HomeTeamLineup {
+    goalies: Goaly[];
+    players: Player[];
+}
+
+export interface Goaly {
+    person_id: string;
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    start: string;
+    position: string;
+    position_str: string;
+    status: string;
+    rookie: string;
+    seconds: number;
+    time: string;
+    shots_against: number;
+    goals_against: number;
+    saves: number;
+    goals: number;
+    assists: number;
+    pim: number;
+    jersey_number: string;
+}
+
+export interface Player {
+    person_id: string;
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    start: string;
+    position: string;
+    position_str: string;
+    status: string;
+    rookie: string;
+    goals: number;
+    assists: number;
+    plusminus: any;
+    pim: number;
+    faceoff_wins: string;
+    faceoff_attempts: string;
+    hits: string;
+    shots: string;
+    shots_on: string;
+    jersey_number: string;
+}
+
+export interface VisitorTeamLineup {
+    goalies: Goaly[];
+    players: Player[];
+}
+
+export interface Coaches {
+    visitor: Coach[];
+    home: Coach[];
+}
+
+export interface Coach {
+    last_name: string;
+    first_name: string;
+    description: string;
+    coach_type_id: string;
+    person_id: string;
+}
+
+export interface VisitorAndHomeStats {
+    visitor: number;
+    home: number;
+}
+
+export interface VisitorAndHomeAttWon {
+    att: number;
+    won: number;
+}
+
+export interface ShotsByPeriod {
+    visitor: Periods;
+    home: Periods;
+}
+
+export interface Penaltyshots {
+    visitor: any[];
+    home: any[];
+}
+
+export interface TotalFaceoffs {
+    visitor: VisitorAndHomeAttWon;
+    home: VisitorAndHomeAttWon;
+}
+
+export interface GameSummary {
+    meta: Meta;
+    txt_title: string;
+    txt_scoring: string;
+    txt_total: string;
+    txt_shots: string;
+    game_ident: string;
+    game_date: string;
+    game_length: string;
+    status_title: string;
+    status_value: string;
+    periods: Periods;
+    shootout: string;
+    visitor: HomeOrVisitor;
+    home: HomeOrVisitor;
+    mvps: Mvp[];
+    venue: string;
+    referee1: string;
+    referee2: string;
+    linesman1: string;
+    linesman2: string;
+    officialsOnIce: Official[];
+    officialsOffIce: Official[];
+    shootoutDetail: any[];
+    homeShootout: number;
+    visitorShootout: number;
+    benchGoalCount?: any;
+    penalties: Penalty[];
+    goals: Goal[];
+    goalies: Goalies;
+    home_team_lineup: HomeTeamLineup;
+    visitor_team_lineup: VisitorTeamLineup;
+    game_date_iso_8601: Date;
+    coaches: Coaches;
+    pimBench: VisitorAndHomeStats;
+    powerPlayGoals: VisitorAndHomeStats;
+    powerPlayCount: VisitorAndHomeStats;
+    goalCount: VisitorAndHomeStats;
+    assistCount: VisitorAndHomeStats;
+    pointsCount: VisitorAndHomeStats;
+    pimTotal: VisitorAndHomeStats;
+    infCount: VisitorAndHomeStats;
+    shotsByPeriod: ShotsByPeriod;
+    penaltyshots: Penaltyshots;
+    totalFaceoffs: TotalFaceoffs;
+    totalHits: VisitorAndHomeStats;
+    totalGoals: VisitorAndHomeStats;
+    totalShots: VisitorAndHomeStats;
+    totalShotsOn: VisitorAndHomeStats;
+    goalsByPeriod: GoalsByPeriod;
+}
+
+export interface GCParameters {
+    feed: string;
+    key: string;
+    client_code: string;
+    game_id: string;
+    lang_code: string;
+    fmt: string;
+    tab: string;
+    lang_id: number;
+    static: number;
+}
+
+export interface GCGameSummary {
+    Parameters: GCParameters;
+    Gamesummary: GameSummary;
+}
+
+
+export interface GameSummaryResponse {
+    GC: GCGameSummary;
 }
