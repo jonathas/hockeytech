@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 
-class HockeyTech {
+export default class HockeyTech {
     constructor(key, clientCode, language = 'en') {
         this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
         this._gameCenterBaseUrl = 'http://cluster.leaguestat.com/feed/';
@@ -304,5 +304,3 @@ class HockeyTech {
         return res.data;
     }
 }
-
-exports.default = HockeyTech;
