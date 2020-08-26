@@ -50,7 +50,6 @@
         "no-unneeded-ternary": 2,
         "one-var": [2, "never"],
         "operator-linebreak": [2, "after"],
-        "padded-blocks": [2, "never"],
         "quote-props": [2, "consistent-as-needed"],
         "semi-spacing": [
             2,
