@@ -4,8 +4,9 @@ export default class HockeyTech {
      * @param key string
      * @param clientCode string
      * @param language string Examples: en, fr
+     * @param proxyBaseUrl string Example: http://localhost:3001/proxy?url=
      */
-    constructor(key: string, clientCode: string, language?: string);
+    constructor(key: string, clientCode: string, language?: string, proxyBaseUrl?: string);
 
     /**
      * Changes the default base url for the modulekit endpoints
@@ -36,6 +37,11 @@ export default class HockeyTech {
      * @param language string
      */
     setLanguage(language: string): void;
+
+    /**
+     * Retrieves the client code
+     */
+    getClientCode(): string;
 
     /**
      * Retrieves the daily schedule

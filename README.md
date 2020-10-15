@@ -20,10 +20,11 @@ HockeyTech is a worldwide leader in providing hockey-related technologies, analy
 
 ## Usage
 
-Inform the key, the client code and a language code (if other than 'en') when creating a new object
+Inform the key, the client code, a language code ('en' or 'fr') and optionally a proxy base url when creating a new object.
+The proxy is necessary in development, as the HockeyTech API doesn't allow localhost access.
 
 ```javascript
-import HockeyTech from "hockeytech";
+import HockeyTech from 'hockeytech';
 
 const ht = new HockeyTech('4767a11864244441', 'ohl');
 
@@ -32,9 +33,17 @@ ht.getSeasonList()
     .catch(err => console.log(err));
 ```
 
-## TODO
+or
 
-- Add types for the responses
+```javascript
+import HockeyTech from 'hockeytech';
+
+const ht = new HockeyTech('4767a11864244441', 'ohl', 'en', 'http://localhost:3001/proxy?url=');
+
+ht.getSeasonList()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+```
 
 ## Maintainer
 

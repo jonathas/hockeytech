@@ -24,9 +24,9 @@
     const axios = require('axios').default;
 
     return class HockeyTech {
-        constructor(key, clientCode, language = 'en') {
-            this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
-            this._gameCenterBaseUrl = 'http://cluster.leaguestat.com/feed/';
+        constructor(key, clientCode, language = 'en', proxyBaseUrl = '') {
+            this._modulekitBaseUrl = `${proxyBaseUrl}https://lscluster.hockeytech.com/feed/`;
+            this._gameCenterBaseUrl = `${proxyBaseUrl}http://cluster.leaguestat.com/feed/`;
             this._key = key;
             this._clientCode = clientCode;
             this._language = language;
@@ -50,6 +50,10 @@
 
         setLanguage(language) {
             this._language = language;
+        }
+
+        getClientCode() {
+            return this._clientCode;
         }
 
         _getConfig(feed) {
