@@ -27,7 +27,7 @@
         constructor(key, clientCode, language = 'en', proxyBaseUrl = '') {
             this._proxyBaseUrl = proxyBaseUrl;
             this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
-            this._gameCenterBaseUrl = 'http://cluster.leaguestat.com/feed/';
+            this._gameCenterBaseUrl = 'https://cluster.leaguestat.com/feed/';
             this._key = key;
             this._clientCode = clientCode;
             this._language = language;
