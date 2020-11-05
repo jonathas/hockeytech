@@ -68,7 +68,7 @@ export default class HockeyTech {
      * @param numberOfDaysAhead number
      * @param numberOfDaysBack number
      */
-    getScorebar(numberOfDaysAhead: number, numberOfDaysBack: number): Promise<any>;
+    getScorebar(numberOfDaysAhead: number, numberOfDaysBack: number): Promise<ScorebarResponse>;
 
     /**
      * Retrieves the Player Profile => Bio (Header section)
@@ -1031,7 +1031,76 @@ export interface GCGameSummary {
     Gamesummary: GameSummary;
 }
 
-
 export interface GameSummaryResponse {
     GC: GCGameSummary;
+}
+
+export interface Scorebar {
+    ID: string;
+    SeasonID: string;
+    game_number: string;
+    game_letter: string;
+    game_type: string;
+    quick_score: string;
+    Date: string;
+    GameDate: string;
+    GameDateISO8601: Date;
+    ScheduledTime: string;
+    ScheduledFormattedTime: string;
+    Timezone: string;
+    TicketUrl: string;
+    HomeID: string;
+    HomeCode: string;
+    HomeCity: string;
+    HomeNickname: string;
+    HomeLongName: string;
+    HomeGoals: string;
+    HomeAudioUrl: string;
+    HomeVideoUrl: string;
+    HomeWebcastUrl: string;
+    VisitorID: string;
+    VisitorCode: string;
+    VisitorCity: string;
+    VisitorNickname: string;
+    VisitorLongName: string;
+    VisitorGoals: string;
+    VisitorAudioUrl: string;
+    VisitorVideoUrl: string;
+    VisitorWebcastUrl: string;
+    Period: string;
+    PeriodNameShort: string;
+    PeriodNameLong: string;
+    GameClock: string;
+    GameSummaryUrl: string;
+    HomeWins: string;
+    HomeRegulationLosses: string;
+    HomeOTLosses: string;
+    HomeShootoutLosses: string;
+    VisitorWins: string;
+    VisitorRegulationLosses: string;
+    VisitorOTLosses: string;
+    VisitorShootoutLosses: string;
+    /**
+     * @param GameStatus 2=In Progress
+     */
+    GameStatus: string;
+    Intermission: string;
+    GameStatusString: string;
+    GameStatusStringLong: string;
+    Ord: string;
+    venue_name: string;
+    venue_location: string;
+    league_name: string;
+    league_code: string;
+    TimezoneShort: string;
+    HomeLogo: string;
+    VisitorLogo: string;
+}
+
+export interface SiteKitScorebar extends SiteKit {
+    Scorebar: Scorebar[];
+}
+
+export interface ScorebarResponse {
+    SiteKit: SiteKitScorebar;
 }
