@@ -1080,6 +1080,9 @@ export interface Scorebar {
     VisitorRegulationLosses: string;
     VisitorOTLosses: string;
     VisitorShootoutLosses: string;
+    /**
+     * @param GameStatus 2=In Progress
+     */
     GameStatus: string;
     Intermission: string;
     GameStatusString: string;
