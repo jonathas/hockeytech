@@ -543,9 +543,16 @@ export interface TeamGoalsByPeriod {
 }
 
 export interface GoalsByPeriod {
-    1: number;
-    2: number;
-    3: number;
+    home: {
+        1: number;
+        2: number;
+        3: number;
+    };
+    visitor: {
+        1: number;
+        2: number;
+        3: number;
+    };
 }
 
 export interface Period {
