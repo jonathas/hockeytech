@@ -15,7 +15,7 @@
     "url": "git+https://github.com/jonathas/hockeytech.git"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
