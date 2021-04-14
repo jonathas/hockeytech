@@ -542,7 +542,7 @@ export interface TeamGoalsByPeriod {
     3: string;
 }
 
-export interface GoalsByPeriod {
+export interface NumericStatsByPeriod {
     home: {
         1: number;
         2: number;
@@ -954,11 +954,6 @@ export interface VisitorAndHomeAttWon {
     won: number;
 }
 
-export interface ShotsByPeriod {
-    visitor: Periods;
-    home: Periods;
-}
-
 export interface Penaltyshots {
     visitor: any[];
     home: any[];
@@ -1011,14 +1006,14 @@ export interface GameSummary {
     pointsCount: VisitorAndHomeStats;
     pimTotal: VisitorAndHomeStats;
     infCount: VisitorAndHomeStats;
-    shotsByPeriod: ShotsByPeriod;
+    shotsByPeriod: NumericStatsByPeriod;
     penaltyshots: Penaltyshots;
     totalFaceoffs: TotalFaceoffs;
     totalHits: VisitorAndHomeStats;
     totalGoals: VisitorAndHomeStats;
     totalShots: VisitorAndHomeStats;
     totalShotsOn: VisitorAndHomeStats;
-    goalsByPeriod: GoalsByPeriod;
+    goalsByPeriod: NumericStatsByPeriod;
 }
 
 export interface GCParameters {
