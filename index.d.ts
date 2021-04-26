@@ -1037,7 +1037,7 @@ export interface GameSummaryResponse {
     GC: GCGameSummary;
 }
 
-export interface Scorebar {
+export interface ScorebarMatch {
     ID: string;
     SeasonID: string;
     game_number: string;
@@ -1046,7 +1046,7 @@ export interface Scorebar {
     quick_score: string;
     Date: string;
     GameDate: string;
-    GameDateISO8601: Date;
+    GameDateISO8601: string;
     ScheduledTime: string;
     ScheduledFormattedTime: string;
     Timezone: string;
@@ -1100,7 +1100,7 @@ export interface Scorebar {
 }
 
 export interface SiteKitScorebar extends SiteKit {
-    Scorebar: Scorebar[];
+    Scorebar: ScorebarMatch[];
 }
 
 export interface ScorebarResponse {
