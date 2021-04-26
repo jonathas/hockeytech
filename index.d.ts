@@ -1046,7 +1046,7 @@ export interface Scorebar {
     quick_score: string;
     Date: string;
     GameDate: string;
-    GameDateISO8601: Date;
+    GameDateISO8601: string;
     ScheduledTime: string;
     ScheduledFormattedTime: string;
     Timezone: string;
