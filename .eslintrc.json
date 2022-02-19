@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "rules": {
         "no-async-promise-executor": 2,
         "no-misleading-character-class": 2,

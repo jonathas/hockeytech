@@ -15,17 +15,19 @@
     "url": "git+https://github.com/jonathas/hockeytech.git"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.26.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.3.4",
-    "auto-changelog": "2.0.0",
-    "babel-eslint": "10.1.0",
-    "eslint": "6.8.0",
-    "eslint-plugin-security": "1.4.0",
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "auto-changelog": "^2.4.0",
+    "eslint": "^8.9.0",
+    "eslint-plugin-security": "^1.4.0",
     "husky": "4.2.5",
-    "release-it": "13.6.1"
+    "release-it": "^14.12.4"
   },
   "keywords": [
     "package",
