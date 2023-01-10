@@ -4,7 +4,6 @@
 .release-it.js
 commitlint.config.js
 babel.config.json
-CHANGELOG:md
-commitlint.config.js
+CHANGELOG.md
 .husky
 .github
