@@ -11,8 +11,7 @@ module.exports = {
       tagAnnotation: "${version}",
       push: true,
       requireCommits: true,
-      changelog:
-        "npx auto-changelog --stdout --commit-limit false -u --template ./changelog.hbs"
+      changelog: "npx auto-changelog --stdout --commit-limit false -u --template https://raw.githubusercontent.com/release-it/release-it/master/templates/changelog-compact.hbs"
     },
     github: {
       release: false,

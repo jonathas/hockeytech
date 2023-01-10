@@ -2,5 +2,9 @@
 .eslintignore
 .eslintrc.json
 .release-it.js
-changelog.hbs
 commitlint.config.js
+babel.config.json
+CHANGELOG:md
+commitlint.config.js
+.husky
+.github
