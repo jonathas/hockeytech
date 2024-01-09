@@ -24,13 +24,14 @@
     const axios = require('axios').default;
 
     return class HockeyTech {
-        constructor(key, clientCode, language = 'en', proxyBaseUrl = '') {
+        constructor(key, clientCode, language = 'en', proxyBaseUrl = '', axiosConfig = undefined) {
             this._proxyBaseUrl = proxyBaseUrl;
             this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
             this._gameCenterBaseUrl = 'https://cluster.leaguestat.com/feed/';
             this._key = key;
             this._clientCode = clientCode;
             this._language = language;
+            this._axiosConfig = axiosConfig;
         }
 
         setModulekitBaseUrl(modulekitBaseUrl) {
@@ -92,7 +93,7 @@
             const config = this._getModulekitConfig('gamesbydate');
             config.params['fetch_date'] = fetchDate;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -101,7 +102,7 @@
             config.params['start_date'] = startDate;
             config.params['end_date'] = endDate;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -110,7 +111,7 @@
             config.params['season_id'] = seasonId;
             config.params['team_id'] = teamId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -119,7 +120,7 @@
             config.params['numberofdaysahead'] = numberOfDaysAhead;
             config.params['numberofdaysback'] = numberOfDaysBack;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -133,7 +134,7 @@
             const config = this._getPlayerConfig(playerId);
             config.params['category'] = 'profile';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -142,7 +143,7 @@
             config.params['person_id'] = personId; // ????
             config.params['category'] = 'media';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -150,7 +151,7 @@
             const config = this._getPlayerConfig(playerId);
             config.params['category'] = 'seasonstats';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -158,7 +159,7 @@
             const config = this._getPlayerConfig(playerId);
             config.params['category'] = 'gamebygame';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -166,14 +167,14 @@
             const config = this._getPlayerConfig(playerId);
             config.params['category'] = 'mostrecentseasonstats';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getSeasonList() {
             const config = this._getModulekitConfig('seasons');
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -181,7 +182,7 @@
             const config = this._getModulekitConfig('teamsbyseason');
             config.params['season_id'] = seasonId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -193,7 +194,7 @@
                 config.params['team_id'] = teamId;
             }
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -201,7 +202,7 @@
             const config = this._getModulekitConfig('standingtypes');
             config.params['season_id'] = seasonId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -211,7 +212,7 @@
             config.params['stat'] = stat;
             config.params['type'] = standingType;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -227,7 +228,7 @@
             const config = this._getLeadersConfig(seasonId, returnAmount, qualified);
             config.params['type'] = 'skaters';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -235,7 +236,7 @@
             const config = this._getLeadersConfig(seasonId, returnAmount, qualified);
             config.params['type'] = 'goalies';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -255,7 +256,7 @@
             const config = this._getStatViewTypeConfig(seasonId, 'topscorers', options);
             config.params['qualified'] = options.qualified || 'qualified';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -263,7 +264,7 @@
             const config = this._getStatViewTypeConfig(seasonId, 'topgoalies', options);
             config.params['qualified'] = options.qualified || 'qualified';
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -271,7 +272,7 @@
             const config = this._getStatViewTypeConfig(seasonId, 'skaters', options);
             config.params['team_id'] = teamId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -279,21 +280,21 @@
             const config = this._getStatViewTypeConfig(seasonId, 'goalies', options);
             config.params['team_id'] = teamId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getStreaks(seasonId, options = {}) {
             const config = this._getStatViewTypeConfig(seasonId, 'streaks', options);
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getTransactions(seasonId, options = {}) {
             const config = this._getStatViewTypeConfig(seasonId, 'transactions', options);
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -301,7 +302,7 @@
             const config = this._getModulekitConfig('brackets');
             config.params['season_id'] = seasonId;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
@@ -309,31 +310,31 @@
             const config = this._getModulekitConfig('searchplayers');
             config.params['search_term'] = searchTerm;
 
-            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._modulekitBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getGamePreview(gameId) {
             const config = this._getGameCenterConfig(gameId, 'preview');
-            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getGamePlayByPlay(gameId) {
             const config = this._getGameCenterConfig(gameId, 'pxpverbose');
-            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getGameClock(gameId) {
             const config = this._getGameCenterConfig(gameId, 'clock');
-            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config), this._axiosConfig);
             return res.data;
         }
 
         async getGameSummary(gameId) {
             const config = this._getGameCenterConfig(gameId, 'gamesummary');
-            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config));
+            const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config), this._axiosConfig);
             return res.data;
         }
     };

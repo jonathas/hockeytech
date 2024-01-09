@@ -1,3 +1,5 @@
+import type { AxiosRequestConfig } from "axios";
+
 export default class HockeyTech {
     /**
      * Constructor
@@ -5,8 +7,9 @@ export default class HockeyTech {
      * @param clientCode string
      * @param language string Examples: en, fr
      * @param proxyBaseUrl string Example: http://localhost:3001/proxy?url=
+     * @param axiosConfig AxiosRequestConfig Custom Axios configuration for all requests, e.g. to override the adapter for Cloudflare Workers
      */
-    constructor(key: string, clientCode: string, language?: string, proxyBaseUrl?: string);
+    constructor(key: string, clientCode: string, language?: string, proxyBaseUrl?: string, axoisConfig?: AxiosRequestConfig);
 
     /**
      * Changes the default base url for the modulekit endpoints
