@@ -656,7 +656,7 @@ export interface SiteKitPlayerStatsBySeason extends SiteKit {
 }
 
 export interface SiteKitPlayerStatsBySeasonResponse {
-    SiteKit: SiteKitPlayerStatsBySeason
+    SiteKit: SiteKitPlayerStatsBySeason;
 }
 
 export interface PlayerCurrentSeasonStats {
