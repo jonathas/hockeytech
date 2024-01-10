@@ -88,7 +88,7 @@ export default class HockeyTech {
      * Retrieves the player's stats by season
      * @param playerId number
      */
-    getPlayerProfileStatsBySeason(playerId: number): Promise<any>;
+    getPlayerProfileStatsBySeason(playerId: number): Promise<SiteKitPlayerStatsBySeasonResponse>;
 
     /**
      * Retrieves the player's game by game stats
@@ -552,6 +552,111 @@ export interface SiteKitPlayerBio extends SiteKit {
 
 export interface SiteKitPlayerBioResponse {
     SiteKit: SiteKitPlayerBio
+}
+
+export interface PlayerSeasonStat {
+    season_id: string;
+    season_name: string;
+    shortname: string;
+    playoff: string;
+    career: string;
+    max_start_date: string;
+    veteran_status: string;
+    veteran: string;
+    jersey_number: string;
+    goals: string;
+    games_played: string;
+    assists: string;
+    points: string;
+    plus_minus: string;
+    penalty_minutes: string;
+    power_play_goals: string;
+    power_play_assists: string;
+    shots: string;
+    shootout_attempts: string;
+    shootout_goals: string;
+    shootout_percentage: string;
+    shooting_percentage: string;
+    shootout_winning_goals: string;
+    points_per_game: string;
+    short_handed_goals: string;
+    short_handed_assists: string;
+    game_winning_goals: string;
+    game_tieing_goals: string;
+    faceoff_wins: string;
+    faceoff_attempts: string;
+    faceoff_pct: string;
+    hits: string;
+    team_name: string;
+    team_code: string;
+    team_city: string;
+    team_nickname: string;
+    team_id: string;
+    active: string;
+    first_goals: string;
+    insurance_goals: string;
+    overtime_goals: string;
+    unassisted_goals: string;
+    empty_net_goals: string;
+    penalty_minutes_per_game: string;
+    division: string;
+}
+
+export interface PlayerSeasonStatTotal {
+    season_name: string;
+    shortname: string;
+    playoff: number;
+    season_id: number;
+    career: number;
+    max_start_date: number;
+    veteran_status: number;
+    jersey_number: number;
+    goals: number;
+    games_played: number;
+    assists: number;
+    points: number;
+    plus_minus: number;
+    penalty_minutes: number;
+    power_play_goals: number;
+    power_play_assists: number;
+    shots: number;
+    shootout_attempts: number;
+    shootout_goals: number;
+    shootout_percentage: string;
+    shooting_percentage: string;
+    shootout_winning_goals: number;
+    points_per_game: string;
+    short_handed_goals: number;
+    short_handed_assists: number;
+    game_winning_goals: number;
+    game_tieing_goals: number;
+    faceoff_wins: number;
+    faceoff_attempts: number;
+    faceoff_pct: number;
+    hits: number;
+    first_goals: number;
+    insurance_goals: number;
+    overtime_goals: number;
+    unassisted_goals: number;
+    empty_net_goals: number;
+    penalty_minutes_per_game: string;
+}
+
+export interface PlayerStatsBySeason {
+    /** Includes a final "Total" object, summarizing the prior elements */
+    regular?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    /** Preseason. See `regular` comment */
+    exhibition?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    /** Postseason. See `regular` comment */
+    playoff?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+}
+
+export interface SiteKitPlayerStatsBySeason extends SiteKit {
+    Player: PlayerStatsBySeason;
+}
+
+export interface SiteKitPlayerStatsBySeasonResponse {
+    SiteKit: SiteKitPlayerStatsBySeason
 }
 
 export interface GoalSummary {
