@@ -82,7 +82,7 @@ export default class HockeyTech {
      * but it is like this in the documentation
      * @param personId number
      */
-    getPlayerProfileMedia(personId: number): Promise<any>;
+    getPlayerProfileMedia(personId: number): Promise<SiteKitPlayerMediaResponse>;
 
     /**
      * Retrieves the player's stats by season
@@ -766,6 +766,33 @@ export interface SiteKitPlayerGameByGameStats extends SiteKit {
 
 export interface SiteKitPlayerGameByGameStatsResponse {
     SiteKit: SiteKitPlayerGameByGameStats;
+}
+
+export interface PlayerMedia {
+    id: string;
+    person_id: string;
+    media_type: string;
+    lang_id: string;
+    title: string;
+    uploaded: string;
+    is_primary: string;
+    uploaded_name: string;
+    file_name: string;
+    modified: string;
+    deleted: string;
+    height: string;
+    width: string;
+    player_id: string;
+    thumb: string;
+    url: string;
+}
+
+export interface SiteKitPlayerMedia extends SiteKit {
+    Player: PlayerMedia[];
+}
+
+export interface SiteKitPlayerMediaResponse {
+    SiteKit: SiteKitPlayerMedia;
 }
 
 export interface GoalSummary {
