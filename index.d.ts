@@ -74,7 +74,7 @@ export default class HockeyTech {
      * Retrieves the Player Profile => Bio (Header section)
      * @param playerId number
      */
-    getPlayerProfileBio(playerId: number): Promise<any>;
+    getPlayerProfileBio(playerId: number): Promise<SiteKitPlayerBioResponse>;
 
     /**
      * Retrieves the Player Profile => Player Media
@@ -260,7 +260,7 @@ export default class HockeyTech {
      * Searches for a person
      * @param searchTerm string
      */
-    searchPerson(searchTerm: string): Promise<any>;
+    searchPerson(searchTerm: string): Promise<SiteKitSearchPlayersResponse>;
 
     /**
      * Retrieves the game preview
@@ -474,6 +474,84 @@ export interface SiteKitGamesPerDay {
 
 export interface GamesPerDayResponse {
     SiteKit: SiteKitGamesPerDay;
+}
+
+export interface SearchPlayersResult {
+    person_id: string;
+    player_id: string;
+    active: string;
+    first_name: string;
+    last_name: string;
+    phonetic_name: string;
+    shoots: string;
+    catches: string;
+    height: string;
+    weight: string;
+    rawbirthdate: string;
+    birthdate: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    team_id: string;
+    jersey_number: string;
+    role_id: string;
+    season_id: string;
+    role_name: string;
+    all_roles: string;
+    last_team_name: string;
+    last_team_code: string;
+    division: string;
+    position: string;
+    profile_image: string;
+    score: string;
+    last_active_date: string;
+}
+
+export interface SiteKitSearchPlayers extends SiteKit {
+    Searchplayers: SearchPlayersResult[];
+}
+
+export interface SiteKitSearchPlayersResponse {
+    SiteKit: SiteKitSearchPlayers
+}
+
+export interface PlayerBio {
+    first_name: string;
+    last_name: string;
+    jersey_number: string;
+    most_recent_team_id: string;
+    most_recent_team_name: string;
+    most_recent_team_code: string;
+    division: string;
+    active: string;
+    rookie: string;
+    position: string;
+    height: string;
+    weight: string;
+    birthdate: string;
+    shoots: string;
+    catches: string;
+    bio: string;
+    name: string;
+    primary_image: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    hometown: string;
+    homeprov: string;
+    homecntry: string;
+    draft: Array<unknown>,
+    draft_type: string;
+    careerhigh: string;
+    current_team: string;
+}
+
+export interface SiteKitPlayerBio extends SiteKit {
+    Player: PlayerBio;
+}
+
+export interface SiteKitPlayerBioResponse {
+    SiteKit: SiteKitPlayerBio
 }
 
 export interface GoalSummary {
