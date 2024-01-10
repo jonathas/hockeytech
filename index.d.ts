@@ -94,7 +94,7 @@ export default class HockeyTech {
      * Retrieves the player's game by game stats
      * @param playerId number
      */
-    getPlayerProfileGameByGameStats(playerId: number): Promise<any>;
+    getPlayerProfileGameByGameStats(playerId: number): Promise<SiteKitPlayerGameByGameStatsResponse>;
 
     /**
      * Retrieves the player's current season stats
@@ -712,7 +712,60 @@ export interface SiteKitPlayerCurrentSeasonStats extends SiteKit {
 }
 
 export interface SiteKitPlayerCurrentSeasonStatsResponse {
-    SiteKit: SiteKitPlayerCurrentSeasonStats
+    SiteKit: SiteKitPlayerCurrentSeasonStats;
+}
+
+export interface PlayerGameByGameStatsGame {
+    gMonth: string;
+    id: string;
+    home_team: string;
+    visiting_team: string;
+    date_played: string;
+    home: string;
+    shots: string;
+    goalie: string;
+    home_team_code: string;
+    home_team_name: string;
+    home_division: string;
+    visiting_team_code: string;
+    visiting_team_name: string;
+    visiting_division: string;
+    goals: string;
+    plusminus: string;
+    assists: string;
+    shootout_goals: string;
+    shootout_attempts: string;
+    shootout_goals_win: string;
+    shootout_shots: string;
+    penalty_minutes: string;
+    shooting_percentage: string;
+    shootout_shots_percentage: number,
+    points: number,
+    player_team: string;
+    plus_minus: string;
+    power_play_goals: string;
+    short_handed_goals: string;
+    empty_net_goals: string;
+    /** Insurance goals */
+    insurange_goals: string;
+    game_winning_goals: string;
+    first_goals_scored: string;
+    game_tieing_goals: string;
+    faceoffs_taken: string;
+    faceoffs_won: string;
+}
+
+export interface PlayerGameByGameStats {
+    games: PlayerGameByGameStatsGame[];
+    seasons_played: { season_id: number; season_name: string }[];
+}
+
+export interface SiteKitPlayerGameByGameStats extends SiteKit {
+    Player: PlayerGameByGameStats;
+}
+
+export interface SiteKitPlayerGameByGameStatsResponse {
+    SiteKit: SiteKitPlayerGameByGameStats;
 }
 
 export interface GoalSummary {
