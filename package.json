@@ -16,7 +16,7 @@
     "url": "git+https://github.com/jonathas/hockeytech.git"
   },
   "dependencies": {
-    "axios": "^0.26.0"
+    "axios": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
