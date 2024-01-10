@@ -77,7 +77,7 @@ export default class HockeyTech {
      * Retrieves the Player Profile => Bio (Header section)
      * @param playerId number
      */
-    getPlayerProfileBio(playerId: number): Promise<any>;
+    getPlayerProfileBio(playerId: number): Promise<SiteKitPlayerBioResponse>;
 
     /**
      * Retrieves the Player Profile => Player Media
@@ -85,25 +85,25 @@ export default class HockeyTech {
      * but it is like this in the documentation
      * @param personId number
      */
-    getPlayerProfileMedia(personId: number): Promise<any>;
+    getPlayerProfileMedia(personId: number): Promise<SiteKitPlayerMediaResponse>;
 
     /**
      * Retrieves the player's stats by season
      * @param playerId number
      */
-    getPlayerProfileStatsBySeason(playerId: number): Promise<any>;
+    getPlayerProfileStatsBySeason(playerId: number): Promise<SiteKitPlayerStatsBySeasonResponse>;
 
     /**
      * Retrieves the player's game by game stats
      * @param playerId number
      */
-    getPlayerProfileGameByGameStats(playerId: number): Promise<any>;
+    getPlayerProfileGameByGameStats(playerId: number): Promise<SiteKitPlayerGameByGameStatsResponse>;
 
     /**
      * Retrieves the player's current season stats
      * @param playerId number
      */
-    getPlayerProfileCurrentSeasonStats(playerId: number): Promise<any>;
+    getPlayerProfileCurrentSeasonStats(playerId: number): Promise<SiteKitPlayerCurrentSeasonStatsResponse>;
 
     /**
      * Retrieves the season list
@@ -263,7 +263,7 @@ export default class HockeyTech {
      * Searches for a person
      * @param searchTerm string
      */
-    searchPerson(searchTerm: string): Promise<any>;
+    searchPerson(searchTerm: string): Promise<SiteKitSearchPlayersResponse>;
 
     /**
      * Retrieves the game preview
@@ -289,6 +289,8 @@ export default class HockeyTech {
      */
     getGameSummary(gameId: number): Promise<GameSummaryResponse>;
 }
+
+export type NumericBoolean = "1" | "0";
 
 export interface StatViewTypeConfigOptions {
     /**
@@ -387,6 +389,13 @@ export interface TeamsBySeasonResponse {
     SiteKit: SiteKitTeamsBySeason;
 }
 
+export enum GameStatus {
+    NotStarted = "1",
+    InProgress = "2",
+    // 3 might be unused
+    Final = "4",
+}
+
 export interface Schedule {
     id: string;
     game_id: string;
@@ -402,24 +411,24 @@ export interface Schedule {
     home_goal_count: string;
     visiting_goal_count: string;
     period: string;
-    overtime: string;
+    overtime: NumericBoolean;
     schedule_time: string;
     schedule_notes: string;
     game_clock: string;
     timezone: string;
     game_number: string;
-    shootout: string;
+    shootout: NumericBoolean;
     attendance: string;
-    status: string;
+    status: GameStatus;
     location: string;
     game_status: string;
-    intermission: string;
+    intermission: NumericBoolean;
     game_type: string;
     game_letter: string;
-    if_necessary: string;
+    if_necessary: NumericBoolean;
     period_trans: string;
     started: string;
-    final: string;
+    final: NumericBoolean;
     tickets_url: string;
     home_audio_url: string;
     home_video_url: string;
@@ -440,7 +449,7 @@ export interface Schedule {
     visiting_team_division_long: string;
     visiting_team_division_short: string;
     notes_text: string;
-    use_shootouts: string;
+    use_shootouts: NumericBoolean;
     venue_name: string;
     venue_url: string;
     venue_location: string;
@@ -477,6 +486,325 @@ export interface SiteKitGamesPerDay {
 
 export interface GamesPerDayResponse {
     SiteKit: SiteKitGamesPerDay;
+}
+
+export interface SearchPlayersResult {
+    person_id: string;
+    player_id: string;
+    active: NumericBoolean;
+    first_name: string;
+    last_name: string;
+    phonetic_name: string;
+    shoots: string;
+    catches: string;
+    height: string;
+    weight: string;
+    rawbirthdate: string;
+    birthdate: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    team_id: string;
+    jersey_number: string;
+    role_id: string;
+    season_id: string;
+    role_name: string;
+    all_roles: string;
+    last_team_name: string;
+    last_team_code: string;
+    division: string;
+    position: string;
+    profile_image: string;
+    score: string;
+    last_active_date: string;
+}
+
+export interface SiteKitSearchPlayers extends SiteKit {
+    Searchplayers: SearchPlayersResult[];
+}
+
+export interface SiteKitSearchPlayersResponse {
+    SiteKit: SiteKitSearchPlayers
+}
+
+export interface PlayerBio {
+    first_name: string;
+    last_name: string;
+    jersey_number: string;
+    most_recent_team_id: string;
+    most_recent_team_name: string;
+    most_recent_team_code: string;
+    division: string;
+    active: NumericBoolean;
+    rookie: NumericBoolean;
+    position: string;
+    height: string;
+    weight: string;
+    birthdate: string;
+    shoots: string;
+    catches: string;
+    bio: string;
+    name: string;
+    primary_image: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    hometown: string;
+    homeprov: string;
+    homecntry: string;
+    draft: Array<unknown>,
+    draft_type: string;
+    careerhigh: string;
+    current_team: string;
+}
+
+export interface SiteKitPlayerBio extends SiteKit {
+    Player: PlayerBio;
+}
+
+export interface SiteKitPlayerBioResponse {
+    SiteKit: SiteKitPlayerBio
+}
+
+export interface PlayerSeasonStat {
+    season_id: string;
+    season_name: string;
+    shortname: string;
+    playoff: string;
+    career: string;
+    max_start_date: string;
+    veteran_status: string;
+    veteran: string;
+    jersey_number: string;
+    goals: string;
+    games_played: string;
+    assists: string;
+    points: string;
+    plus_minus: string;
+    penalty_minutes: string;
+    power_play_goals: string;
+    power_play_assists: string;
+    shots: string;
+    shootout_attempts: string;
+    shootout_goals: string;
+    shootout_percentage: string;
+    shooting_percentage: string;
+    shootout_winning_goals: string;
+    points_per_game: string;
+    short_handed_goals: string;
+    short_handed_assists: string;
+    game_winning_goals: string;
+    game_tieing_goals: string;
+    faceoff_wins: string;
+    faceoff_attempts: string;
+    faceoff_pct: string;
+    hits: string;
+    team_name: string;
+    team_code: string;
+    team_city: string;
+    team_nickname: string;
+    team_id: string;
+    active: NumericBoolean;
+    first_goals: string;
+    insurance_goals: string;
+    overtime_goals: string;
+    unassisted_goals: string;
+    empty_net_goals: string;
+    penalty_minutes_per_game: string;
+    division: string;
+}
+
+export interface PlayerSeasonStatTotal {
+    season_name: string;
+    shortname: string;
+    playoff: number;
+    season_id: number;
+    career: number;
+    max_start_date: number;
+    veteran_status: number;
+    jersey_number: number;
+    goals: number;
+    games_played: number;
+    assists: number;
+    points: number;
+    plus_minus: number;
+    penalty_minutes: number;
+    power_play_goals: number;
+    power_play_assists: number;
+    shots: number;
+    shootout_attempts: number;
+    shootout_goals: number;
+    shootout_percentage: string;
+    shooting_percentage: string;
+    shootout_winning_goals: number;
+    points_per_game: string;
+    short_handed_goals: number;
+    short_handed_assists: number;
+    game_winning_goals: number;
+    game_tieing_goals: number;
+    faceoff_wins: number;
+    faceoff_attempts: number;
+    faceoff_pct: number;
+    hits: number;
+    first_goals: number;
+    insurance_goals: number;
+    overtime_goals: number;
+    unassisted_goals: number;
+    empty_net_goals: number;
+    penalty_minutes_per_game: string;
+}
+
+export interface PlayerStatsBySeason {
+    /** Includes a final "Total" object, summarizing the prior elements */
+    regular?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    /** Preseason. See `regular` comment */
+    exhibition?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    /** Postseason. See `regular` comment */
+    playoff?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+}
+
+export interface SiteKitPlayerStatsBySeason extends SiteKit {
+    Player: PlayerStatsBySeason;
+}
+
+export interface SiteKitPlayerStatsBySeasonResponse {
+    SiteKit: SiteKitPlayerStatsBySeason;
+}
+
+export interface PlayerCurrentSeasonStats {
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    season_id: string;
+    season_name: string;
+    team_id: string;
+    team_name: string;
+    division: string;
+    games_played: string;
+    game_winning_goals: string;
+    game_tieing_goals: string;
+    first_goals: string;
+    insurance_goals: string;
+    unassisted_goals: string;
+    empty_net_goals: string;
+    overtime_goals: string;
+    ice_time: string;
+    ice_time_avg: string;
+    goals: string;
+    shots: string;
+    shooting_percentage: string;
+    assists: string;
+    points: string;
+    points_per_game: string;
+    plus_minus: string;
+    penalty_minutes: string;
+    penalty_minutes_per_game: string;
+    minor_penalties: string;
+    major_penalties: string;
+    power_play_goals: string;
+    power_play_assists: string;
+    power_play_points: string;
+    short_handed_goals: string;
+    short_handed_assists: string;
+    short_handed_points: string;
+    shootout_goals: string;
+    shootout_attempts: string;
+    shootout_winning_goals: string;
+    shootout_games_played: string;
+    faceoff_attempts: string;
+    faceoff_wins: string;
+    faceoff_pct: string;
+    faceoff_wa: string;
+    shots_on: string;
+    shootout_percentage: string;
+}
+
+export interface SiteKitPlayerCurrentSeasonStats extends SiteKit {
+    Player: PlayerCurrentSeasonStats;
+}
+
+export interface SiteKitPlayerCurrentSeasonStatsResponse {
+    SiteKit: SiteKitPlayerCurrentSeasonStats;
+}
+
+export interface PlayerGameByGameStatsGame {
+    gMonth: string;
+    id: string;
+    home_team: string;
+    visiting_team: string;
+    date_played: string;
+    home: string;
+    shots: string;
+    goalie: string;
+    home_team_code: string;
+    home_team_name: string;
+    home_division: string;
+    visiting_team_code: string;
+    visiting_team_name: string;
+    visiting_division: string;
+    goals: string;
+    plusminus: string;
+    assists: string;
+    shootout_goals: string;
+    shootout_attempts: string;
+    shootout_goals_win: string;
+    shootout_shots: string;
+    penalty_minutes: string;
+    shooting_percentage: string;
+    shootout_shots_percentage: number,
+    points: number,
+    player_team: string;
+    plus_minus: string;
+    power_play_goals: string;
+    short_handed_goals: string;
+    empty_net_goals: string;
+    /** Insurance goals */
+    insurange_goals: string;
+    game_winning_goals: string;
+    first_goals_scored: string;
+    game_tieing_goals: string;
+    faceoffs_taken: string;
+    faceoffs_won: string;
+}
+
+export interface PlayerGameByGameStats {
+    games: PlayerGameByGameStatsGame[];
+    seasons_played: { season_id: number; season_name: string }[];
+}
+
+export interface SiteKitPlayerGameByGameStats extends SiteKit {
+    Player: PlayerGameByGameStats;
+}
+
+export interface SiteKitPlayerGameByGameStatsResponse {
+    SiteKit: SiteKitPlayerGameByGameStats;
+}
+
+export interface PlayerMedia {
+    id: string;
+    person_id: string;
+    media_type: string;
+    lang_id: string;
+    title: string;
+    uploaded: string;
+    is_primary: NumericBoolean;
+    uploaded_name: string;
+    file_name: string;
+    modified: string;
+    deleted: NumericBoolean;
+    height: string;
+    width: string;
+    player_id: string;
+    thumb: string;
+    url: string;
+}
+
+export interface SiteKitPlayerMedia extends SiteKit {
+    Player: PlayerMedia[];
+}
+
+export interface SiteKitPlayerMediaResponse {
+    SiteKit: SiteKitPlayerMedia;
 }
 
 export interface GoalSummary {
@@ -609,8 +937,8 @@ export interface GamesByDate {
     visiting_manager: string;
     period: string;
     game_clock: string;
-    status: string;
-    started: string;
+    status: GameStatus;
+    started: NumericBoolean;
     pending_final: string;
     final: string;
     home_goal_count: string;
@@ -716,7 +1044,7 @@ export interface Meta {
     visiting_manager: string;
     period: string;
     game_clock: string;
-    status: string;
+    status: GameStatus;
     started: string;
     pending_final: string;
     final: string;
@@ -766,7 +1094,7 @@ export interface HomeOrVisitor {
     country: string;
     phone: string;
     fax: string;
-    active: string;
+    active: NumericBoolean;
     placeholder: string;
     team_id: string;
     lang_id: string;
@@ -1085,10 +1413,7 @@ export interface ScorebarMatch {
     VisitorRegulationLosses: string;
     VisitorOTLosses: string;
     VisitorShootoutLosses: string;
-    /**
-     * @param GameStatus 2=In Progress
-     */
-    GameStatus: string;
+    GameStatus: GameStatus;
     Intermission: string;
     GameStatusString: string;
     GameStatusStringLong: string;
