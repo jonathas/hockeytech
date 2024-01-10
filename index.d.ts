@@ -287,6 +287,8 @@ export default class HockeyTech {
     getGameSummary(gameId: number): Promise<GameSummaryResponse>;
 }
 
+export type NumericBoolean = "1" | "0";
+
 export interface StatViewTypeConfigOptions {
     /**
      * Defaults to 0
@@ -384,6 +386,13 @@ export interface TeamsBySeasonResponse {
     SiteKit: SiteKitTeamsBySeason;
 }
 
+export enum GameStatus {
+    NotStarted = "1",
+    InProgress = "2",
+    // 3 might be unused
+    Final = "4",
+}
+
 export interface Schedule {
     id: string;
     game_id: string;
@@ -399,24 +408,24 @@ export interface Schedule {
     home_goal_count: string;
     visiting_goal_count: string;
     period: string;
-    overtime: string;
+    overtime: NumericBoolean;
     schedule_time: string;
     schedule_notes: string;
     game_clock: string;
     timezone: string;
     game_number: string;
-    shootout: string;
+    shootout: NumericBoolean;
     attendance: string;
-    status: string;
+    status: GameStatus;
     location: string;
     game_status: string;
-    intermission: string;
+    intermission: NumericBoolean;
     game_type: string;
     game_letter: string;
-    if_necessary: string;
+    if_necessary: NumericBoolean;
     period_trans: string;
     started: string;
-    final: string;
+    final: NumericBoolean;
     tickets_url: string;
     home_audio_url: string;
     home_video_url: string;
@@ -437,7 +446,7 @@ export interface Schedule {
     visiting_team_division_long: string;
     visiting_team_division_short: string;
     notes_text: string;
-    use_shootouts: string;
+    use_shootouts: NumericBoolean;
     venue_name: string;
     venue_url: string;
     venue_location: string;
@@ -479,7 +488,7 @@ export interface GamesPerDayResponse {
 export interface SearchPlayersResult {
     person_id: string;
     player_id: string;
-    active: string;
+    active: NumericBoolean;
     first_name: string;
     last_name: string;
     phonetic_name: string;
@@ -523,8 +532,8 @@ export interface PlayerBio {
     most_recent_team_name: string;
     most_recent_team_code: string;
     division: string;
-    active: string;
-    rookie: string;
+    active: NumericBoolean;
+    rookie: NumericBoolean;
     position: string;
     height: string;
     weight: string;
@@ -592,7 +601,7 @@ export interface PlayerSeasonStat {
     team_city: string;
     team_nickname: string;
     team_id: string;
-    active: string;
+    active: NumericBoolean;
     first_goals: string;
     insurance_goals: string;
     overtime_goals: string;
@@ -775,11 +784,11 @@ export interface PlayerMedia {
     lang_id: string;
     title: string;
     uploaded: string;
-    is_primary: string;
+    is_primary: NumericBoolean;
     uploaded_name: string;
     file_name: string;
     modified: string;
-    deleted: string;
+    deleted: NumericBoolean;
     height: string;
     width: string;
     player_id: string;
@@ -925,8 +934,8 @@ export interface GamesByDate {
     visiting_manager: string;
     period: string;
     game_clock: string;
-    status: string;
-    started: string;
+    status: GameStatus;
+    started: NumericBoolean;
     pending_final: string;
     final: string;
     home_goal_count: string;
@@ -1032,7 +1041,7 @@ export interface Meta {
     visiting_manager: string;
     period: string;
     game_clock: string;
-    status: string;
+    status: GameStatus;
     started: string;
     pending_final: string;
     final: string;
@@ -1082,7 +1091,7 @@ export interface HomeOrVisitor {
     country: string;
     phone: string;
     fax: string;
-    active: string;
+    active: NumericBoolean;
     placeholder: string;
     team_id: string;
     lang_id: string;
@@ -1401,10 +1410,7 @@ export interface ScorebarMatch {
     VisitorRegulationLosses: string;
     VisitorOTLosses: string;
     VisitorShootoutLosses: string;
-    /**
-     * @param GameStatus 2=In Progress
-     */
-    GameStatus: string;
+    GameStatus: GameStatus;
     Intermission: string;
     GameStatusString: string;
     GameStatusStringLong: string;
