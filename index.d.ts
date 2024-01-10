@@ -100,7 +100,7 @@ export default class HockeyTech {
      * Retrieves the player's current season stats
      * @param playerId number
      */
-    getPlayerProfileCurrentSeasonStats(playerId: number): Promise<any>;
+    getPlayerProfileCurrentSeasonStats(playerId: number): Promise<SiteKitPlayerCurrentSeasonStatsResponse>;
 
     /**
      * Retrieves the season list
@@ -657,6 +657,62 @@ export interface SiteKitPlayerStatsBySeason extends SiteKit {
 
 export interface SiteKitPlayerStatsBySeasonResponse {
     SiteKit: SiteKitPlayerStatsBySeason
+}
+
+export interface PlayerCurrentSeasonStats {
+    player_id: string;
+    first_name: string;
+    last_name: string;
+    season_id: string;
+    season_name: string;
+    team_id: string;
+    team_name: string;
+    division: string;
+    games_played: string;
+    game_winning_goals: string;
+    game_tieing_goals: string;
+    first_goals: string;
+    insurance_goals: string;
+    unassisted_goals: string;
+    empty_net_goals: string;
+    overtime_goals: string;
+    ice_time: string;
+    ice_time_avg: string;
+    goals: string;
+    shots: string;
+    shooting_percentage: string;
+    assists: string;
+    points: string;
+    points_per_game: string;
+    plus_minus: string;
+    penalty_minutes: string;
+    penalty_minutes_per_game: string;
+    minor_penalties: string;
+    major_penalties: string;
+    power_play_goals: string;
+    power_play_assists: string;
+    power_play_points: string;
+    short_handed_goals: string;
+    short_handed_assists: string;
+    short_handed_points: string;
+    shootout_goals: string;
+    shootout_attempts: string;
+    shootout_winning_goals: string;
+    shootout_games_played: string;
+    faceoff_attempts: string;
+    faceoff_wins: string;
+    faceoff_pct: string;
+    faceoff_wa: string;
+    shots_on: string;
+    shootout_percentage: string;
+}
+
+export interface SiteKitPlayerCurrentSeasonStats extends SiteKit {
+    Player: PlayerCurrentSeasonStats;
+}
+
+export interface SiteKitPlayerCurrentSeasonStatsResponse {
+    SiteKit: SiteKitPlayerCurrentSeasonStats
 }
 
 export interface GoalSummary {
