@@ -342,8 +342,8 @@ export interface Season {
     season_id: string;
     season_name: string;
     shortname: string;
-    career: string;
-    playoff: string;
+    career: NumericBoolean;
+    playoff: NumericBoolean;
     start_date: string;
     end_date: string;
 }
