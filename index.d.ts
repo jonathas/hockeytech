@@ -552,7 +552,7 @@ export interface PlayerBio {
     hometown: string;
     homeprov: string;
     homecntry: string;
-    draft: Array<unknown>,
+    draft: Array<unknown>;
     draft_type: string;
     careerhigh: string;
     current_team: string;
@@ -751,8 +751,8 @@ export interface PlayerGameByGameStatsGame {
     shootout_shots: string;
     penalty_minutes: string;
     shooting_percentage: string;
-    shootout_shots_percentage: number,
-    points: number,
+    shootout_shots_percentage: number;
+    points: number;
     player_team: string;
     plus_minus: string;
     power_play_goals: string;
