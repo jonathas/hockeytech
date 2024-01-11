@@ -657,6 +657,8 @@ export interface GoalieSeasonStat {
     gaa: string;
 }
 
+export type PlayerSeasonStat = SkaterSeasonStat | GoalieSeasonStat;
+
 export interface SkaterSeasonStatTotal {
     season_name: string;
     shortname: string;
@@ -733,13 +735,15 @@ export interface GoalieSeasonStatTotal {
     gaa: string;
 }
 
+export type PlayerSeasonStatTotal = SkaterSeasonStatTotal | GoalieSeasonStatTotal;
+
 export interface PlayerStatsBySeason {
     /** Includes a final "Total" object, summarizing the prior elements */
-    regular?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
+    regular?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
     /** Preseason. See `regular` comment */
-    exhibition?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
+    exhibition?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
     /** Postseason. See `regular` comment */
-    playoff?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
+    playoff?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
 }
 
 export interface SiteKitPlayerStatsBySeason extends SiteKit {
