@@ -64,7 +64,7 @@ export default class HockeyTech {
      * @param seasonId number
      * @param teamId number
      */
-    getRoster(seasonId: number, teamId: number): Promise<any>;
+    getRoster(seasonId: number, teamId: number): Promise<SiteKitRosterResponse>;
 
     /**
      * Retrieves the scorebar
@@ -805,6 +805,65 @@ export interface SiteKitPlayerMedia extends SiteKit {
 
 export interface SiteKitPlayerMediaResponse {
     SiteKit: SiteKitPlayerMedia;
+}
+
+export interface RosterPlayer {
+    /** Player ID */
+    id: string;
+    person_id: string;
+    active: NumericBoolean;
+    first_name: string;
+    last_name: string;
+    phonetic_name: string;
+    display_name: string;
+    shoots: string;
+    hometown: string;
+    homeprov: string;
+    homecntry: string;
+    homeplace: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    birthplace: string;
+    height: string;
+    weight: string;
+    height_hyphenated: string;
+    hidden: string;
+    current_team: string;
+    /** Same as `id` */
+    player_id: string;
+    status: string;
+    birthdate: string;
+    birthdate_year: string;
+    rawbirthdate: string;
+    latest_team_id: string;
+    veteran_status: string;
+    veteran_description: string;
+    team_name: string;
+    division: string;
+    tp_jersey_number: string;
+    rookie: NumericBoolean;
+    position_id: string;
+    position: string;
+    nhlteam: string;
+    /** Same as `id` */
+    playerId: string;
+    /** HTML encoded */
+    isRookie: string;
+    h: string;
+    w: string;
+    draft_status: string;
+    draftinfo: Array<unknown>;
+    name: string;
+    player_image: string;
+}
+
+export interface SiteKitRoster extends SiteKit {
+    Roster: RosterPlayer[];
+}
+
+export interface SiteKitRosterResponse {
+    SiteKit: SiteKitRoster
 }
 
 export interface GoalSummary {
