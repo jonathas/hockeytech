@@ -566,11 +566,11 @@ export interface SiteKitPlayerBioResponse {
     SiteKit: SiteKitPlayerBio
 }
 
-export interface PlayerSeasonStat {
+export interface SkaterSeasonStat {
     season_id: string;
     season_name: string;
     shortname: string;
-    playoff: string;
+    playoff: NumericBoolean;
     career: string;
     max_start_date: string;
     veteran_status: string;
@@ -614,7 +614,50 @@ export interface PlayerSeasonStat {
     division: string;
 }
 
-export interface PlayerSeasonStatTotal {
+export interface GoalieSeasonStat {
+    season_id: string;
+    season_name: string;
+    shortname: string;
+    playoff: NumericBoolean;
+    career: string;
+    max_start_date: string;
+    veteran_status: string;
+    veteran: string;
+    goals_against: string;
+    shootout_goals_against: string;
+    shootout_saves: string;
+    goals_against_average: string;
+    games_played: string;
+    minutes_played: string;
+    seconds_played: string;
+    shots_against: string;
+    wins: string;
+    losses: string;
+    ties: string;
+    ot_losses: string;
+    total_losses: string;
+    shootout_losses: string;
+    ot: string;
+    sosavepct: string;
+    shootout_shots: string;
+    shutouts: string;
+    saves: string;
+    savepct: string;
+    goals: string;
+    assists: string;
+    points: string;
+    penalty_minutes: string;
+    team_name: string;
+    team_code: string;
+    team_city: string;
+    team_nickname: string;
+    team_id: string;
+    division: string;
+    shotspct: string;
+    gaa: string;
+}
+
+export interface SkaterSeasonStatTotal {
     season_name: string;
     shortname: string;
     playoff: number;
@@ -654,13 +697,49 @@ export interface PlayerSeasonStatTotal {
     penalty_minutes_per_game: string;
 }
 
+export interface GoalieSeasonStatTotal {
+    season_name: string;
+    shortname: string;
+    playoff: number;
+    season_id: number;
+    career: number;
+    max_start_date: number;
+    veteran_status: number;
+    goals_against: number;
+    shootout_goals_against: number;
+    shootout_saves: number;
+    goals_against_average: string;
+    games_played: number;
+    minutes_played: number;
+    seconds_played: number;
+    shots_against: number;
+    wins: number;
+    losses: number;
+    ties: number;
+    ot_losses: number;
+    total_losses: number;
+    shootout_losses: number;
+    ot: number;
+    sosavepct: string;
+    shootout_shots: number;
+    shutouts: number;
+    saves: number;
+    savepct: string;
+    goals: number;
+    assists: number;
+    points: number;
+    penalty_minutes: number;
+    shotspct: string;
+    gaa: string;
+}
+
 export interface PlayerStatsBySeason {
     /** Includes a final "Total" object, summarizing the prior elements */
-    regular?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    regular?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
     /** Preseason. See `regular` comment */
-    exhibition?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    exhibition?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
     /** Postseason. See `regular` comment */
-    playoff?: Array<PlayerSeasonStat | PlayerSeasonStatTotal>;
+    playoff?: Array<SkaterSeasonStat | SkaterSeasonStatTotal | GoalieSeasonStat | GoalieSeasonStatTotal>;
 }
 
 export interface SiteKitPlayerStatsBySeason extends SiteKit {
