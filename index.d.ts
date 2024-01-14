@@ -64,7 +64,7 @@ export default class HockeyTech {
      * @param seasonId number
      * @param teamId number
      */
-    getRoster(seasonId: number, teamId: number): Promise<any>;
+    getRoster(seasonId: number, teamId: number): Promise<SiteKitRosterResponse>;
 
     /**
      * Retrieves the scorebar
@@ -342,8 +342,8 @@ export interface Season {
     season_id: string;
     season_name: string;
     shortname: string;
-    career: string;
-    playoff: string;
+    career: NumericBoolean;
+    playoff: NumericBoolean;
     start_date: string;
     end_date: string;
 }
@@ -552,7 +552,7 @@ export interface PlayerBio {
     hometown: string;
     homeprov: string;
     homecntry: string;
-    draft: Array<unknown>,
+    draft: Array<unknown>;
     draft_type: string;
     careerhigh: string;
     current_team: string;
@@ -566,11 +566,11 @@ export interface SiteKitPlayerBioResponse {
     SiteKit: SiteKitPlayerBio
 }
 
-export interface PlayerSeasonStat {
+export interface SkaterSeasonStat {
     season_id: string;
     season_name: string;
     shortname: string;
-    playoff: string;
+    playoff: NumericBoolean;
     career: string;
     max_start_date: string;
     veteran_status: string;
@@ -614,7 +614,52 @@ export interface PlayerSeasonStat {
     division: string;
 }
 
-export interface PlayerSeasonStatTotal {
+export interface GoalieSeasonStat {
+    season_id: string;
+    season_name: string;
+    shortname: string;
+    playoff: NumericBoolean;
+    career: string;
+    max_start_date: string;
+    veteran_status: string;
+    veteran: string;
+    goals_against: string;
+    shootout_goals_against: string;
+    shootout_saves: string;
+    goals_against_average: string;
+    games_played: string;
+    minutes_played: string;
+    seconds_played: string;
+    shots_against: string;
+    wins: string;
+    losses: string;
+    ties: string;
+    ot_losses: string;
+    total_losses: string;
+    shootout_losses: string;
+    ot: string;
+    sosavepct: string;
+    shootout_shots: string;
+    shutouts: string;
+    saves: string;
+    savepct: string;
+    goals: string;
+    assists: string;
+    points: string;
+    penalty_minutes: string;
+    team_name: string;
+    team_code: string;
+    team_city: string;
+    team_nickname: string;
+    team_id: string;
+    division: string;
+    shotspct: string;
+    gaa: string;
+}
+
+export type PlayerSeasonStat = SkaterSeasonStat | GoalieSeasonStat;
+
+export interface SkaterSeasonStatTotal {
     season_name: string;
     shortname: string;
     playoff: number;
@@ -653,6 +698,44 @@ export interface PlayerSeasonStatTotal {
     empty_net_goals: number;
     penalty_minutes_per_game: string;
 }
+
+export interface GoalieSeasonStatTotal {
+    season_name: string;
+    shortname: string;
+    playoff: number;
+    season_id: number;
+    career: number;
+    max_start_date: number;
+    veteran_status: number;
+    goals_against: number;
+    shootout_goals_against: number;
+    shootout_saves: number;
+    goals_against_average: string;
+    games_played: number;
+    minutes_played: number;
+    seconds_played: number;
+    shots_against: number;
+    wins: number;
+    losses: number;
+    ties: number;
+    ot_losses: number;
+    total_losses: number;
+    shootout_losses: number;
+    ot: number;
+    sosavepct: string;
+    shootout_shots: number;
+    shutouts: number;
+    saves: number;
+    savepct: string;
+    goals: number;
+    assists: number;
+    points: number;
+    penalty_minutes: number;
+    shotspct: string;
+    gaa: string;
+}
+
+export type PlayerSeasonStatTotal = SkaterSeasonStatTotal | GoalieSeasonStatTotal;
 
 export interface PlayerStatsBySeason {
     /** Includes a final "Total" object, summarizing the prior elements */
@@ -751,8 +834,8 @@ export interface PlayerGameByGameStatsGame {
     shootout_shots: string;
     penalty_minutes: string;
     shooting_percentage: string;
-    shootout_shots_percentage: number,
-    points: number,
+    shootout_shots_percentage: number;
+    points: number;
     player_team: string;
     plus_minus: string;
     power_play_goals: string;
@@ -805,6 +888,65 @@ export interface SiteKitPlayerMedia extends SiteKit {
 
 export interface SiteKitPlayerMediaResponse {
     SiteKit: SiteKitPlayerMedia;
+}
+
+export interface RosterPlayer {
+    /** Player ID */
+    id: string;
+    person_id: string;
+    active: NumericBoolean;
+    first_name: string;
+    last_name: string;
+    phonetic_name: string;
+    display_name: string;
+    shoots: string;
+    hometown: string;
+    homeprov: string;
+    homecntry: string;
+    homeplace: string;
+    birthtown: string;
+    birthprov: string;
+    birthcntry: string;
+    birthplace: string;
+    height: string;
+    weight: string;
+    height_hyphenated: string;
+    hidden: string;
+    current_team: string;
+    /** Same as `id` */
+    player_id: string;
+    status: string;
+    birthdate: string;
+    birthdate_year: string;
+    rawbirthdate: string;
+    latest_team_id: string;
+    veteran_status: string;
+    veteran_description: string;
+    team_name: string;
+    division: string;
+    tp_jersey_number: string;
+    rookie: NumericBoolean;
+    position_id: string;
+    position: string;
+    nhlteam: string;
+    /** Same as `id` */
+    playerId: string;
+    /** HTML encoded */
+    isRookie: string;
+    h: string;
+    w: string;
+    draft_status: string;
+    draftinfo: Array<unknown>;
+    name: string;
+    player_image: string;
+}
+
+export interface SiteKitRoster extends SiteKit {
+    Roster: RosterPlayer[];
+}
+
+export interface SiteKitRosterResponse {
+    SiteKit: SiteKitRoster
 }
 
 export interface GoalSummary {
