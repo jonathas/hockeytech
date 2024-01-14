@@ -392,7 +392,7 @@ export interface TeamsBySeasonResponse {
 export enum GameStatus {
     NotStarted = "1",
     InProgress = "2",
-    // 3 might be unused
+    UnofficialFinal = "3",
     Final = "4",
 }
 
