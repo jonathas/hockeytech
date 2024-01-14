@@ -1,18 +1,28 @@
+const GameStatus = {
+    NotStarted: '1',
+    InProgress: '2',
+    UnofficialFinal: '3',
+    Final: '4',
+};
+
+// To make it immutable
+Object.freeze(GameStatus);
+
 /* global define */
 (function (root = {returnExportsGlobal: null}, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define([], function () {
-            return (root.returnExportsGlobal = factory());
+            return (root.returnExportsGlobal = factory(GameStatus));
         });
     } else if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory();
+        module.exports = factory(GameStatus);
     } else {
         // Browser globals
-        root.returnExportsGlobal = factory();
+        root.returnExportsGlobal = factory(GameStatus);
     }
 
 }(this, function () {
@@ -23,7 +33,7 @@
 
     const axios = require('axios').default;
 
-    return class HockeyTech {
+    class HockeyTech {
         constructor(key, clientCode, language = 'en', proxyBaseUrl = '', axiosConfig = undefined) {
             this._proxyBaseUrl = proxyBaseUrl;
             this._modulekitBaseUrl = 'https://lscluster.hockeytech.com/feed/';
@@ -337,5 +347,9 @@
             const res = await axios.get(this._getEndpoint(this._gameCenterBaseUrl, config), this._axiosConfig);
             return res.data;
         }
-    };
+    }
+
+    HockeyTech.GameStatus = GameStatus;
+
+    return HockeyTech;
 }));
