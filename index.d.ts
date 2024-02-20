@@ -1597,12 +1597,13 @@ export interface GamePlayByPlayEventBase {
 
 export interface GamePlayByPlayEventGoalieChange extends GamePlayByPlayEventBase {
     event: GamePlayByPlayEvent.GoalieChange;
-    goalie_in_id: string;
+    goalie_in_id: string | null;
     goalie_out_id: string | null;
     period_id: string;
     team_code: string;
     team_id: string;
     goalie_in_info: PlayerInfo;
+    goalie_out_info?: PlayerInfo;
 }
 
 export interface GamePlayByPlayEventFaceoff extends GamePlayByPlayEventBase {
