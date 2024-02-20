@@ -1588,7 +1588,6 @@ export enum GamePlayByPlayEvent {
 }
 
 export interface GamePlayByPlayEventBase {
-    id: string;
     event: GamePlayByPlayEvent;
     /** Could be long-form like 00:00:00, or shorter, like 0:00. If available, you may prefer to use `time_formatted` */
     time: string;
@@ -1607,6 +1606,7 @@ export interface GamePlayByPlayEventGoalieChange extends GamePlayByPlayEventBase
 }
 
 export interface GamePlayByPlayEventFaceoff extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.Faceoff;
     period: string;
     time_formatted: string;
@@ -1622,6 +1622,7 @@ export interface GamePlayByPlayEventFaceoff extends GamePlayByPlayEventBase {
 }
 
 export interface GamePlayByPlayEventShot extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.Shot;
     player_id: string;
     goalie_id: string;
@@ -1644,6 +1645,7 @@ export interface GamePlayByPlayEventShot extends GamePlayByPlayEventBase {
 }
 
 export interface GamePlayByPlayEventBlockedShot extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.BlockedShot;
     game_id: string;
     player_id: string;
@@ -1673,6 +1675,7 @@ export interface GamePlayByPlayEventBlockedShot extends GamePlayByPlayEventBase 
 }
 
 export interface GamePlayByPlayEventHit extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.Hit;
     home: NumericBoolean;
     team_id: string;
@@ -1686,6 +1689,7 @@ export interface GamePlayByPlayEventHit extends GamePlayByPlayEventBase {
 }
 
 export interface GamePlayByPlayEventPenalty extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.Penalty;
     player_id: string;
     player_served: string;
@@ -1710,6 +1714,7 @@ export interface GamePlayByPlayEventPenalty extends GamePlayByPlayEventBase {
 }
 
 export interface GamePlayByPlayEventGoal extends GamePlayByPlayEventBase {
+    id: string;
     event: GamePlayByPlayEvent.Goal;
     /** Could be an empty string */
     goal_type: string;
