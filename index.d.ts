@@ -1751,7 +1751,6 @@ export interface GCGamePlayByPlay {
     Parameters: GCParameters;
     Pxpverbose: Array<
         | GamePlayByPlayEventGoalieChange
-        | GamePlayByPlayEventBase
         | GamePlayByPlayEventFaceoff
         | GamePlayByPlayEventShot
         | GamePlayByPlayEventBlockedShot
