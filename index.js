@@ -5,24 +5,35 @@ const GameStatus = {
     Final: '4',
 };
 
+const GamePlayByPlayEvent = {
+    GoalieChange: 'goalie_change',
+    Faceoff: 'faceoff',
+    Shot: 'shot',
+    BlockedShot: 'blocked_shot',
+    Hit: 'hit',
+    Penalty: 'penalty',
+    Goal: 'goal',
+};
+
 // To make it immutable
 Object.freeze(GameStatus);
+Object.freeze(GamePlayByPlayEvent);
 
 /* global define */
 (function (root = {returnExportsGlobal: null}, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define([], function () {
-            return (root.returnExportsGlobal = factory(GameStatus));
+            return (root.returnExportsGlobal = factory(GameStatus, GamePlayByPlayEvent));
         });
     } else if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
-        module.exports = factory(GameStatus);
+        module.exports = factory(GameStatus, GamePlayByPlayEvent);
     } else {
         // Browser globals
-        root.returnExportsGlobal = factory(GameStatus);
+        root.returnExportsGlobal = factory(GameStatus, GamePlayByPlayEvent);
     }
 
 }(this, function () {
@@ -350,6 +361,7 @@ Object.freeze(GameStatus);
     }
 
     HockeyTech.GameStatus = GameStatus;
+    HockeyTech.GamePlayByPlayEvent = GamePlayByPlayEvent;
 
     return HockeyTech;
 }));
