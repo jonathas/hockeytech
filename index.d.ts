@@ -275,7 +275,7 @@ export default class HockeyTech {
      * Retrieves the game play by play
      * @param gameId number
      */
-    getGamePlayByPlay(gameId: number): Promise<any>;
+    getGamePlayByPlay(gameId: number): Promise<GamePlayByPlayResponse>;
 
     /**
      * Retrieves the game clock
@@ -1575,4 +1575,192 @@ export interface SiteKitScorebar extends SiteKit {
 
 export interface ScorebarResponse {
     SiteKit: SiteKitScorebar;
+}
+
+export enum GamePlayByPlayEvent {
+    GoalieChange = "goalie_change",
+    Faceoff = "faceoff",
+    Shot = "shot",
+    BlockedShot = "blocked_shot",
+    Hit = "hit",
+    Penalty = "penalty",
+    Goal = "goal",
+}
+
+export interface GamePlayByPlayEventBase {
+    event: GamePlayByPlayEvent;
+    /** Could be long-form like 00:00:00, or shorter, like 0:00. If available, you may prefer to use `time_formatted` */
+    time: string;
+    /** The number of seconds that have elapsed between the period beginning and this play happening. */
+    s: number;
+}
+
+export interface GamePlayByPlayEventGoalieChange extends GamePlayByPlayEventBase {
+    event: GamePlayByPlayEvent.GoalieChange;
+    goalie_in_id: string | null;
+    goalie_out_id: string | null;
+    period_id: string;
+    team_code: string;
+    team_id: string;
+    goalie_in_info: PlayerInfo;
+    goalie_out_info?: PlayerInfo;
+}
+
+export interface GamePlayByPlayEventFaceoff extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.Faceoff;
+    period: string;
+    time_formatted: string;
+    home_player_id: string;
+    visitor_player_id: string;
+    home_win: NumericBoolean;
+    location_id: string;
+    x_location: number;
+    y_location: number;
+    win_team_id: string;
+    player_home: PlayerInfo;
+    player_visitor: PlayerInfo;
+}
+
+export interface GamePlayByPlayEventShot extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.Shot;
+    player_id: string;
+    goalie_id: string;
+    home: NumericBoolean;
+    team_id: string;
+    period_id: string;
+    time_formatted: string;
+    x_location: number;
+    y_location: number;
+    shot_type: string;
+    shot_type_description: string;
+    shot_quality_description: string;
+    quality: string;
+    /** Possibly an empty string */
+    game_goal_id: string;
+    player_team_id: string;
+    goalie_team_id: string;
+    player: PlayerInfo;
+    goalie: PlayerInfo;
+}
+
+export interface GamePlayByPlayEventBlockedShot extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.BlockedShot;
+    game_id: string;
+    player_id: string;
+    goalie_id: string;
+    team_id: string;
+    home: NumericBoolean;
+    blocker_player_id: string;
+    x_location: number;
+    y_location: number;
+    orientation: string;
+    /** Stringified version of `s` */
+    seconds: string;
+    time_formatted: string;
+    /** Same as `period_id` */
+    period: string;
+    period_id: string;
+    period_long_name: string;
+    shot_type: string;
+    shot_type_description: string;
+    quality: string;
+    shot_quality_description: string;
+    player_team_id: string;
+    blocker_team_id: string;
+    player: PlayerInfo;
+    goalie: PlayerInfo;
+    blocker: PlayerInfo;
+}
+
+export interface GamePlayByPlayEventHit extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.Hit;
+    home: NumericBoolean;
+    team_id: string;
+    player_id: string;
+    period: string;
+    time_formatted: string;
+    x_location: number;
+    y_location: number;
+    hit_type: string;
+    hitter: PlayerInfo;
+}
+
+export interface GamePlayByPlayEventPenalty extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.Penalty;
+    player_id: string;
+    player_served: string;
+    offence: string;
+    pp: NumericBoolean;
+    time_off_formatted: string;
+    /** Long period name (1st, 2nd, ...), not period ID */
+    period: string;
+    bench: NumericBoolean;
+    home: NumericBoolean;
+    penalty_shot: NumericBoolean;
+    /** Stringified decimal number (e.g. 2.00) */
+    minutes: string;
+    minutes_formatted: string;
+    penalty_class_id: string;
+    penalty_class: string;
+    lang_penalty_description: string;
+    period_id: string;
+    player_penalized_info: PlayerInfo;
+    player_served_info: PlayerInfo;
+    team_id: string;
+}
+
+export interface GamePlayByPlayEventGoal extends GamePlayByPlayEventBase {
+    id: string;
+    event: GamePlayByPlayEvent.Goal;
+    /** Could be an empty string */
+    goal_type: string;
+    home: NumericBoolean;
+    team_id: string;
+    goal_player_id: string;
+    /** Empty string if no first assist */
+    assist1_player_id: string;
+    /** Empty string if no second assist */
+    assist2_player_id: string;
+    time_formatted: string;
+    /** Long period name (1st, 2nd, ...), not period ID */
+    period: string;
+    x_location: number;
+    y_location: number;
+    location_set: NumericBoolean;
+    power_play: NumericBoolean;
+    empty_net: NumericBoolean;
+    penalty_shot: NumericBoolean;
+    short_handed: NumericBoolean;
+    insurance_goal: NumericBoolean;
+    game_winning: NumericBoolean;
+    game_tieing: NumericBoolean;
+    period_id: string;
+    scorer_goal_num: string;
+    plus: PlayerInfo[];
+    minus: PlayerInfo[];
+    goal_scorer: PlayerInfo;
+    assist1_player?: PlayerInfo;
+    assist2_player?: PlayerInfo;
+}
+
+export interface GCGamePlayByPlay {
+    Parameters: GCParameters;
+    Pxpverbose: Array<
+        | GamePlayByPlayEventGoalieChange
+        | GamePlayByPlayEventFaceoff
+        | GamePlayByPlayEventShot
+        | GamePlayByPlayEventBlockedShot
+        | GamePlayByPlayEventHit
+        | GamePlayByPlayEventPenalty
+        | GamePlayByPlayEventGoal
+    >;
+}
+
+export interface GamePlayByPlayResponse {
+    GC: GCGamePlayByPlay;
 }
